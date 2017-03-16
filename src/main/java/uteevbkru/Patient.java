@@ -2,8 +2,10 @@ package uteevbkru;
 
 public class Patient extends People {
 	
+	
 	private int medPolic;
 	public Letter let = null; 
+	private Prescription pr;
 	
 	public Patient(String fname, String sname, int medPolic){
 		super(fname, sname);
@@ -17,5 +19,11 @@ public class Patient extends People {
 	}
 	public int getMedPolic(){
 		return medPolic;
+	}
+	public void  usePrecs(Prescription A){
+		pr = A;
+	}
+	public Prescription  getPrecs(){
+		return pr; 
 	}
 }

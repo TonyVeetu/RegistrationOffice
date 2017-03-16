@@ -12,6 +12,14 @@ public class Doctor extends People {
 	public String getName(){
 		return super.getName() + " "+ speciality;
 	}
-	
+	public void workWithPatient(Patient A){
+		A.usePrecs(this.givePresc());
+		
+		//	System.sleep(10);
+	}
+	public Prescription givePresc(){
+		Prescription precs = new Prescription();
+		return precs;
+	}
 }
 
