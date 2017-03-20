@@ -18,7 +18,7 @@ public class Doctor extends People {
 		//	System.sleep(10);
 	}
 	public Prescription givePresc(){
-		Prescription precs = new Prescription();
+		Prescription precs = new Prescription(super.getName(), speciality);
 		return precs;
 	}
 }

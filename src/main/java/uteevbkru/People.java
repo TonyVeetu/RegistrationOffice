@@ -1,6 +1,6 @@
 package uteevbkru;
 
-public class People {
+abstract class People {
 
 	private String fName;
 	private String sName;

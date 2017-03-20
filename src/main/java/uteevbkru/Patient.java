@@ -1,21 +1,30 @@
 package uteevbkru;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Patient extends People implements Comparable<Patient>{
 	
-	
+	static int MAX_LET_FOR_ONE_PATIENT = 2;
+	//private int cur_val = 0;
 	private int medPolic;
-	public Letter let = null; 
+	//public List<Letter> listLet = new ArrayList<Letter>();
+	private Letter curLetter = null;
 	private Prescription pr;
 	
 	public Patient(String fname, String sname, int medPolic){
 		super(fname, sname);
 		this.medPolic = medPolic;
 	}
-	public Letter getLetter(){
-		return let;
+	public Letter getLetter(){		
+		//cur_val--;
+		//Letter let = listLet.get(cur_val);		
+		return curLetter;
 	}	
-	public void setLetter(Letter letter){
-		let = letter;
+	public void addLetter(Letter letter){
+		//listLet.add(letter);
+		//cur_val++;
+		curLetter = letter;
 	}
 	public int getMedPolic(){
 		return medPolic;
@@ -23,22 +32,38 @@ public class Patient extends People implements Comparable<Patient>{
 	public void  usePrecs(Prescription A){
 		pr = A;
 	}
-	public Prescription  getPrecs(){
+	public Prescription  getPrescription(){
 		return pr; 
 	}	
-	public int compareTo(Patient b) {
+	/**
+	 *  Пациенты добавляются в очередь согласно времени в талоне!
+	 */
+	public int compareTo(Patient b) {//один навсегда!!!
+		//TODO cur_val
 		Letter let1 = b.getLetter();
+		Letter let = this.getLetter();
+		//TODO cur_val
 		if(let != null && let1 != null){
-			//TODO
-//			if(let.getHH() < let1.getHH() || let.getMM() < let1.getMM() || let.getSS() < let1.getSS()){
-//				return -1;
-//			}
-//			else if(let.getHH() == let1.getHH() && let.getMM() == let1.getMM() && let.getSS() == let1.getSS()){
-//				return 0;
-//			}
-//			else{
-//				return 1;
-//			}
+			int hh1 = let.getHH(); int mm1 = let.getMM(); int ss1 = let.getSS();
+			int hh2 = let1.getHH(); int mm2 = let1.getMM(); int ss2 = let1.getSS();
+			if(hh1 > hh2)
+				return 1;
+			else if(hh1 == hh2){
+				if(mm1 > mm2)
+					return 1;
+				else if(mm1 == mm2){
+					if(ss1 > ss2)
+						return 1;						
+					else if(ss1 == ss2)
+						return 0;
+					else
+						return -1;
+				}
+				else
+					return -1;
+			}
+			else
+				return -1;			
 		}		
 		return 0;
 	}

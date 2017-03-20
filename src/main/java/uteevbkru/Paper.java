@@ -1,10 +1,10 @@
 package uteevbkru;
 
-public class Paper {
+abstract class Paper {
 
-	private String name;
+	private String nameOfOvner;
 	
-	public Paper(String name){
-		this.name = name;
+	public Paper(String nameOfOvner){
+		this.nameOfOvner = nameOfOvner;
 	}
 }
