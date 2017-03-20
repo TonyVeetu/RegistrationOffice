@@ -34,7 +34,7 @@ public class RecordRoom {
 
 	public void giveLetter(Patient P, int numberDoc){
 		Letter let = new Letter(doctors.get(numberDoc));
-		P.addLetter(let);
+		P.addLetter(let);				
 		//TODO
 		//allLets.add(let);//Не нужно ли добавлять в let имя пациента????    
 		switch(numberDoc){
@@ -55,8 +55,7 @@ public class RecordRoom {
 				break;
 			default:
 				System.out.println("*****__Default case in giveLetter__*****");
-		}
-		//TODO нужна статистика выподания цифр!!!! Что бы плотность была равномерной!!!		
+		}		
 	}
 	public void createPatients(){
 		List<String> fname = new ArrayList<String>();
@@ -97,40 +96,40 @@ public class RecordRoom {
 	}
 
 	public void doctorsStartWork(){
-//		System.out.println("1: "+queDoc1.size());
-//		System.out.println("2: "+queDoc2.size());
-//		System.out.println("3: "+queDoc3.size());
-//		System.out.println("4: "+queDoc4.size());
-//		System.out.println("5: "+queDoc5.size());			
+		System.out.println("1: "+queDoc1.size());
+		System.out.println("2: "+queDoc2.size());
+		System.out.println("3: "+queDoc3.size());
+		System.out.println("4: "+queDoc4.size());
+		System.out.println("5: "+queDoc5.size());			
 		Doctor doc1 = doctors.get(0);
 		while(!queDoc1.isEmpty()){
 			Patient pat = queDoc1.poll();		
 			doc1.workWithPatient(pat);
-			//System.out.println(pat.getName()+"; "+pat.getPrescription().getPresc()+"que 1");
+			System.out.println("patient: "+pat.getName()+ " " + pat.getLetter().getStringData() +"; " +pat.getPrescription().getPresc()+"que 1");
 		}
 		Doctor doc2 = doctors.get(1);
 		while(!queDoc2.isEmpty()){
 			Patient pat = queDoc2.poll();		
 			doc2.workWithPatient(pat);
-			//System.out.println(pat.getName()+"; "+pat.getPrescription().getPresc()+"que 2");
+			System.out.println("patient: "+pat.getName()+ " " + pat.getLetter().getStringData() +"; " +pat.getPrescription().getPresc()+"que 2");
 		}
 		Doctor doc3 = doctors.get(2);
 		while(!queDoc3.isEmpty()){
 			Patient pat = queDoc3.poll();			
 			doc3.workWithPatient(pat);
-			//System.out.println(pat.getName()+"; "+pat.getPrescription().getPresc()+"que 3");
+			System.out.println("patient: "+pat.getName()+ " " + pat.getLetter().getStringData() +"; " +pat.getPrescription().getPresc()+"que 3");
 		}
 		Doctor doc4 = doctors.get(3);
 		while(!queDoc4.isEmpty()){
 			Patient pat = queDoc4.poll();		
 			doc4.workWithPatient(pat);
-			//System.out.println(pat.getName()+"; "+pat.getPrescription().getPresc()+"que 4");
+			System.out.println("patient: "+pat.getName()+ " " + pat.getLetter().getStringData() +"; " +pat.getPrescription().getPresc()+"que 4");
 		}
 		Doctor doc5 = doctors.get(4);
 		while(!queDoc5.isEmpty()){
 			Patient pat = queDoc5.poll();			
 			doc5.workWithPatient(pat);
-			//System.out.println(pat.getName()+"; "+pat.getPrescription().getPresc()+"que 5");
+			System.out.println("patient: "+pat.getName()+ " " + pat.getLetter().getStringData() +"; " +pat.getPrescription().getPresc()+"que 5");
 		}
 	}
 
@@ -139,12 +138,33 @@ public class RecordRoom {
 			public int compare(Patient a, Patient b){
 				return a.getName().compareTo(b.getName());
 			}
-		};//локальный
+		};//локальный вн класс!!
 		Set<Patient> sortcol = new TreeSet<Patient>(new NameComparator());
 		sortcol.addAll(pats);		
 		for(Patient pr: sortcol){
 			System.out.println("patient: "+pr.getName());
 		}
 	}
+	
+	public void getListLetForPatient(int i){
+		pats.get(i).getListOfLet();
+	}
 
+	public void printPatientInQueue(){
+		for(int i = 0; i < queDoc3.size(); i++){				
+			Patient p = queDoc3.peek();
+			System.out.println(p.getName() + " que3");
+		}
+		for(int i = 0; i < queDoc1.size(); i++){				
+			Patient p = queDoc1.peek();
+			System.out.println(p.getName() + " que1");
+		}
+		for(int i = 0; i < queDoc2.size(); i++){				
+			Patient p = queDoc2.peek();
+			System.out.println(p.getName() + " que2");		}
+		for(int i = 0; i < queDoc4.size(); i++){				
+			Patient p = queDoc4.peek();
+			System.out.println(p.getName()+" que4");
+		}
+	}
 }

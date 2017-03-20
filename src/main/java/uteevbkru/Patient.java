@@ -6,25 +6,31 @@ import java.util.List;
 public class Patient extends People implements Comparable<Patient>{
 	
 	static int MAX_LET_FOR_ONE_PATIENT = 2;
-	//private int cur_val = 0;
+	private int cur_let = 0;
 	private int medPolic;
-	//public List<Letter> listLet = new ArrayList<Letter>();
-	private Letter curLetter = null;
+	public List<Letter> listLet = new ArrayList<Letter>();
+	//private Letter curLetter = null;
 	private Prescription pr;
 	
 	public Patient(String fname, String sname, int medPolic){
 		super(fname, sname);
 		this.medPolic = medPolic;
 	}
+	//TODO как то не красиво пока!!!
 	public Letter getLetter(){		
-		//cur_val--;
-		//Letter let = listLet.get(cur_val);		
-		return curLetter;
+		cur_let--;
+		Letter let = listLet.get(cur_let);
+		//listLet.remove(cur_let);
+		return let;
 	}	
+	//TODO
+	public Letter useCurLetter(){
+		return listLet.get(cur_let -1);
+	}
 	public void addLetter(Letter letter){
-		//listLet.add(letter);
-		//cur_val++;
-		curLetter = letter;
+		listLet.add(letter);
+		cur_let++;
+		//curLetter = letter;
 	}
 	public int getMedPolic(){
 		return medPolic;
@@ -39,10 +45,8 @@ public class Patient extends People implements Comparable<Patient>{
 	 *  Пациенты добавляются в очередь согласно времени в талоне!
 	 */
 	public int compareTo(Patient b) {//один навсегда!!!
-		//TODO cur_val
-		Letter let1 = b.getLetter();
-		Letter let = this.getLetter();
-		//TODO cur_val
+		Letter let1 = b.useCurLetter();
+		Letter let = listLet.get(cur_let - 1);
 		if(let != null && let1 != null){
 			int hh1 = let.getHH(); int mm1 = let.getMM(); int ss1 = let.getSS();
 			int hh2 = let1.getHH(); int mm2 = let1.getMM(); int ss2 = let1.getSS();
@@ -66,5 +70,11 @@ public class Patient extends People implements Comparable<Patient>{
 				return -1;			
 		}		
 		return 0;
+	}
+	
+	public void getListOfLet(){
+		for(Letter l : listLet){
+			System.out.println(l.getNameDoctor()+" "+l.getStringData());
+		}		
 	}
 }
